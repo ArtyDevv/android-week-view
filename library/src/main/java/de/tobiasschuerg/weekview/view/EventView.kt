@@ -97,6 +97,14 @@ class EventView(
             "123456", maxTextSize, width / 2,
             getY(position = 1, bounds = textBounds) - getY(position = 0, bounds = textBounds)
         )
+        
+        if(config.showTimeStartEnd){
+            val startText = event.timeSpan.start.toLocalString()
+            val endText = event.timeSpan.endExclusive.toLocalString()
+            val startEndText = startText + ' - ' + endText
+            textPaint.getTextBounds(startEndText, 0, startEndText.length, textBounds)
+            canvas.drawText(startEndText, (textBounds.left + paddingLeft).toFloat(), (textBounds.height() + paddingTop).toFloat(), textPaint)
+        }
 
         // start time
         if (config.showTimeStart) {
